@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+      "target": "esnext",
+      "module": "esnext",
+      "moduleResolution": "node",
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "strict": true,
+      "jsx": "preserve",
+      "allowJs": true,
+      "resolveJsonModule": true,
+      "isolatedModules": true,
+      "importHelpers": true,
+      "types": ["vuetify"]
+    },
+    "include": [
+      "src/**/*.ts",
+      "src/**/*.d.ts",
+      "src/**/*.tsx",
+      "src/**/*.vue"
+    ],
+    "exclude": ["node_modules"]
+  }
+  

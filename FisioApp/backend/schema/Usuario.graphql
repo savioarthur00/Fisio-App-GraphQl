@@ -1,0 +1,249 @@
+type Usuario {
+    id: Int
+    nome: String!
+    email: String!
+    token: String
+    perfis: [Perfil]
+}
+
+input UsuarioInput {
+    nome: String
+    email: String
+    senha: String
+    perfis: [PerfilFiltro]
+}
+
+input UsuarioRegistrarInput {
+    nome: String!
+    email: String!
+    senha: String!
+}
+
+input UsuarioLoginInput {
+    email: String!
+    senha: String!
+}
+
+input UsuarioFiltro {
+    id: Int
+    email: String
+}
+
+type Perfil {
+    id: Int
+    nome: String!
+    rotulo: String!
+    usuarios: [Usuario]
+}
+
+input PerfilInput {
+    nome: String
+    rotulo: String
+}
+
+input PerfilFiltro {
+    id: Int
+    nome: String
+}
+
+type Medicamento{
+    id: Int
+    nome: String
+    rotulo: String
+}
+input MedicamentoInput{
+    nome: String
+    rotulo: String
+}
+
+input MedicamentoFiltro {
+    nome: String
+}
+
+type Doenca{
+    id: int
+    nome:String
+}
+input DoencaInput{
+    nome: String
+}
+input DoencaFiltro {
+    nome: String
+}
+
+type Endereco{
+    id:int
+    rua: String
+    numero:String
+    bairro:String
+    cidade:String
+}
+
+input EnderecoInput{
+    rua: String!
+    numero:String!
+    bairro:String!
+    cidade:String!
+}
+input EnderecoFltro{
+    rua: String    
+}
+
+type Contato{
+    id:int
+    pertence:String
+    telefone:String
+    email:String
+}
+input ContatoInput{
+    pertence:String
+    telefone:String
+    email:String
+
+}
+input ContatoFiltro{
+    pertence: String
+}
+
+type evolucao{
+    id:int
+    paciente: Paciente
+    descricaoDoEstadoGeral:String
+    condutaAplicada:String
+    eventuaisIntercorrencias: String
+}
+input evolucaoInput{
+    paciente: PacienteFiltro
+    descricaoDoEstadoGeral:String
+    condutaAplicada:String
+    eventuaisIntercorrencias: String
+}
+
+input AntecedentesPessoaisInput{
+ alergia:String
+ doencas: [doencaFiltro]
+ outros:String
+}
+
+input HabitosDeVidaInput{
+    alergia:String
+    alimentacao:String
+    exerciciosFisicos: String
+    exerciciosFisicos_QntVezesNaSemana: int
+    ingestaoDeAguaPorDia_QuantosLitros: String
+    fumante: String
+    ingestaoDeBebidaAlcoolica: String
+}
+
+
+input HistoriaClinicaInput{
+    
+    antecedentesPessoais:AntecedentesPessoaisInput
+    habitosDeVida: HabitosDeVidaInput
+    medicamentos: [MedicamentoFiltro]
+    queixaPrincipal:String
+    historiaDaDoenca:String
+    historiaFamiliar:String
+    historiaPsicosocial:String
+    cirurgias: String
+    Internacoes:String
+    antecedentesMaternos: String
+    habitosAlimentares:String
+    sono:String
+}
+
+
+input ExameFisicoInput{
+  fc:String 
+  fR: String 
+  pA:String 
+  spO2: int
+  temperatura: int
+  peso: double
+  altura: double
+  iMC: double
+  auscultaPulmonar: String
+  consciencia: String
+  formatoTorax: String
+  outros: String
+  viaDeAcessoDoAr: String
+  usoDeOxigenoterapia: String
+  horario_usoDeOxigenoterapia: String
+  fiO2: String
+  padraoMuscularVentilatorio: String
+  ritmoVentilatorio: String
+  expansibilidadeToracica: String
+  expansibilidadeToracica_Assimetrica: String
+  sinais: Sinais
+  demaisSinais: String
+  sintomas: String
+  demaisSintomas: String
+  usoDeMusculaturaAcessoria: String
+  tosse:String
+  secrecao: String
+  dispneia: String
+  borg: String
+  classificacao: String
+  escalaModificadaDoMRC_Pacientes_Portadores_DPOC:String
+  cianose: String
+  avaliacaoPostural: String
+  palpacao: Strin
+}
+
+type FichaAnaminese {
+    id: Int
+    paciente:Paciente
+    contato:Contato
+    endereco: Endereco
+    exameFisico: ExameFisico
+    historiaClinica: HistoriaClinica
+}
+input FichaAnaminese{
+    paciente:PacienteFiltro
+    contato:ContatoFiltro
+    endereco: EnderecoFltro
+    exameFisico: ExameFisicoInput
+    historiaClinica: HistoriaClinicaInput
+}
+input fichaAnamineseFiltro{
+    paciente: PacienteFiltro
+}
+
+type Paciente {
+    id: Int
+    identificacao: Identificacao
+    fichaAnaminese: FichaAnaminese
+    evolucao: Evolucao
+}
+type PacienteFiltro {
+    id: Int
+    nome: String
+}
+type PacienteInput {
+    id: Int
+    nome: String
+    dataDaAvaliacao: String
+    sexo: String
+    estadocivil: String
+    idade: int
+    raca: String
+    dataDoNascimento: String
+    diagnosticoClinico: String 
+
+}
+type Evolucao{
+    id: int
+    data:String
+    descricaoDoEstadoGeral:String
+    condutaAplicada:String
+    eventuaisIntercorrencias: String
+    
+}
+
+type Fisioterapeuta {
+    id: int
+    identificacao: Identificacao
+    paciente: Pacientes
+
+
+}

@@ -29,7 +29,7 @@ module.exports = {
         ctx && ctx.validarUsuarioFiltro(filtro)
         
         if(!filtro) return null
-        const { id, email } = filtro
+        const { id, email, nome } = filtro
         if(id) {
             return db('usuarios')
                 .where({ id })
@@ -38,7 +38,12 @@ module.exports = {
             return db('usuarios')
                 .where({ email })
                 .first()
-        } else {
+        } else if(nome) {
+            return db('usuarios')
+                .where({ nome })
+                .first()
+        }
+        else {
             return null
         }
     },

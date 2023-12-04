@@ -27,7 +27,8 @@ input UsuarioLoginInput {
 
 input UsuarioFiltro {
     id: Int
-    email: String
+    email:String
+    nome: String
 }
 
 type Perfil {
@@ -41,12 +42,10 @@ input PerfilInput {
     nome: String
     rotulo: String
 }
-
 input PerfilFiltro {
     id: Int
     nome: String
 }
-
 
 type Paciente{
     id: Int
@@ -58,12 +57,14 @@ type Paciente{
     raca: String
     dataDoNascimento: String
     diagnosticoClinico: String 
-    usuario: Usuario
+    usuarios: [Usuario]  
 }
+
 input PacienteFiltro {
     id: Int
     nome: String
 }
+
 input PacienteInput {
     nome: String
     dataDaAvaliacao: String
@@ -72,8 +73,6 @@ input PacienteInput {
     idade: Int
     raca: String
     dataDoNascimento: String
-    diagnosticoClinico: String 
-    usuario:Usuario
-
+    diagnosticoClinico: String
+    usuarios: [UsuarioFiltro]  
 }
-

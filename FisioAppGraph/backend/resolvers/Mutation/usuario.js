@@ -10,6 +10,7 @@ const mutations = {
                 nome: dados.nome,
                 email: dados.email,
                 senha: dados.senha,
+                
             }
         })
     },

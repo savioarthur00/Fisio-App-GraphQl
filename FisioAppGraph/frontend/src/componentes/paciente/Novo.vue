@@ -8,6 +8,8 @@
             <div v-if="erros">
               <Erros :erros="erros" />
             </div>
+                    
+
             <v-text-field label="Nome" v-model="paciente.nome" />
             <v-menu
               ref="dataDaAvaliacaoMenu"
@@ -48,6 +50,17 @@
               <v-date-picker v-model="paciente.dataDoNascimento" no-title></v-date-picker>
             </v-menu>
             <v-text-field label="Diagnóstico Clínico" v-model="paciente.diagnosticoClinico" />
+            <v-select label="Usuarios"
+                            v-model="paciente.usuarios"
+                            :items="usuarios"
+                            item-value="id"
+                            item-text="nome"
+                            attach multiple
+                            chips deletable-chips />
+                        <v-btn class="ml-0 mt-3"
+                            @click="obterUsuario">
+                            Selecionar Fisioterapeuta
+                        </v-btn>
             <v-btn color="primary" class="ml-0 mt-3" @click="novoPaciente">
               Novo Paciente
             </v-btn>
@@ -67,6 +80,9 @@
               <v-text-field label="Raça" readonly v-model="dados.raca" />
               <v-text-field label="Data de Nascimento" readonly v-model="dados.dataDoNascimento" />
               <v-text-field label="Diagnóstico Clínico" readonly v-model="dados.diagnosticoClinico" />
+              <v-text-field label="Usuarios" readonly
+                            :value="usuariosNomes" />
+
             </template>
           </v-layout>
         </v-flex>
@@ -82,6 +98,7 @@
     components: { Erros },
     data() {
       return {
+
         paciente: {
           nome: '',
           dataDaAvaliacao: null, // Inicialmente vazio, para seleção
@@ -91,10 +108,30 @@
           raca: '',
           dataDoNascimento: null, // Inicialmente vazio, para seleção
           diagnosticoClinico: '',
+          usuarioSelecionado: null
         },
         dados: null,
         erros: null,
+        usuarios: []
       }
+    },
+
+    computed: {
+    usuariosNomes() {
+          return (
+            this.dados &&
+            this.dados.usuarios &&
+            this.dados.usuarios.map(p => p.nome).join(', ')
+          );
+    },
+        usuariosSelecionados() {
+        if (this.paciente.usuarioSelecionado) {
+          return this.paciente.usuarioSelecionado.map(id => ({ id }));
+        } else {
+          return null;
+        }
+    }
+
     },
     methods: {
       novoPaciente() {
@@ -109,6 +146,7 @@
               $raca: String
               $dataDoNascimento: String
               $diagnosticoClinico: String
+              $usuarios: [UsuarioFiltro]
             ){
               novoPaciente(
                 dados: {
@@ -120,9 +158,11 @@
                   raca: $raca
                   dataDoNascimento: $dataDoNascimento
                   diagnosticoClinico: $diagnosticoClinico     
+                  usuarios: $usuarios
                 }
               ){
                 id nome dataDaAvaliacao sexo idade raca dataDoNascimento diagnosticoClinico  estadocivil
+                usuarios {nome}
               }
             }
           `,
@@ -135,6 +175,7 @@
             raca: this.paciente.raca,
             dataDoNascimento: this.paciente.dataDoNascimento,
             diagnosticoClinico: this.paciente.diagnosticoClinico,
+            usuarios: this.usuariosSelecionados
           }
         }).then(resultado =>{
           this.dados = resultado.data.novoPaciente;
@@ -144,7 +185,18 @@
           this.erros = e;
         })
       },
-    },
+      obterUsuario() {
+        this.$api.query({
+            query: gql ` {usuarios {id nome}} `
+        }).then(resultado => {
+            this.usuarios = resultado.data.usuarios
+            this.erros = null
+        }).catch(e=> {
+            this.erros = e
+        })
+            
+        }
+    }
   }
   </script>
   

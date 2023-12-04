@@ -58,7 +58,7 @@ type Paciente{
     raca: String
     dataDoNascimento: String
     diagnosticoClinico: String 
-    usuarios: Usuario
+    usuario: Usuario
 }
 input PacienteFiltro {
     id: Int
@@ -73,6 +73,7 @@ input PacienteInput {
     raca: String
     dataDoNascimento: String
     diagnosticoClinico: String 
+    usuario:Usuario
 
 }
 

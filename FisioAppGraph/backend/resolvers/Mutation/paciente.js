@@ -56,18 +56,40 @@ module.exports = {
         }
     },
     async alterarPaciente(_, { filtro, dados }, ctx) {
-        ctx && ctx.validarAdmin()
+       
         try {
-            const paciente= await obterPaciente(_, { filtro })
+            const paciente = await obterPaciente(_, { filtro })
             if(paciente) {
                 const { id } = paciente
+                if(ctx.admin && dados.usuarios) {
+                    await db('usuarios_pacientes')
+                        .where({ paciente_id: id }).delete()
+
+                    for(let filtro of dados.usuarios) {
+                        const usuario = await obterUsuario(_, {
+                            filtro
+                        })
+                        
+                        if(usuario) {
+                            await db('usuarios_pacientes')
+                                .insert({
+                                    usuario_id: usuario.id,
+                                    paciente_id: id
+                                })
+                        }
+                    }
+                }
+
+               
+
+                delete dados.usuarios
                 await db('pacientes')
                     .where({ id })
                     .update(dados)
             }
-            return { ...paciente, ...dados }
+            return !paciente ? null : { ...paciente, ...dados }
         } catch(e) {
-            throw new Error(e.sqlMessage)
+            throw new Error(e)
         }
     }
 }

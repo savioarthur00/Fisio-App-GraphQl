@@ -3,8 +3,8 @@
         <v-layout column>
             <v-flex>
                 <v-btn color="primary" class="ml-0 mb-4"
-                    @click="obterPerfis">
-                    Obter Perfis
+                    @click="obterPacientes">
+                    Obter Pacientes
                 </v-btn>
             </v-flex>
             <v-flex>
@@ -13,12 +13,14 @@
                 </div>
             </v-flex>
             <v-flex>
-                <v-data-table :headers="headers" :items="perfis" 
+                <v-data-table :headers="headers" :items="pacientes" 
                     hide-actions class="elevation-1">
                     <template slot="items" slot-scope="props">
                         <td>{{ props.item.id }}</td>
                         <td>{{ props.item.nome }}</td>
-                        <td>{{ props.item.rotulo }}</td>
+                        <td>{{ props.item.usuarios
+                                .map(p => p.nome)
+                                .join(', ') }}</td>
                     </template>
                 </v-data-table>
             </v-flex>
@@ -35,22 +37,22 @@ export default {
     data() {
         return {
             erros: null,
-            perfis: [],
+            pacientes: [],
             headers: [
                 { text: 'ID', value: 'id' },
-                { text: 'Nome', value: 'name' },
-                { text: 'Rótulo', value: 'rotulo' },
+                { text: 'Nome', value: 'nome' },
+                { text: 'Usuarios', value: 'usuarios' },
             ],
         }
     },
     methods: {
-        obterPerfis() {
+        obterPacientes() {
             this.$api.query({
                 query: gql `
                 
                     query{
-                        perfis {
-                            id nome rotulo
+                        pacientes {
+                            id nome  usuarios {nome}
                         }
                     }
                 
@@ -59,10 +61,10 @@ export default {
 
 
             }).then(resultado =>{
-                this.perfis = resultado.data.perfis
+                this.pacientes = resultado.data.pacientes
                 this.erros = null
             }).catch(e=>{
-                this.perfis  = []
+                this.pacientes = []
                 this.erros = e
             })
         }

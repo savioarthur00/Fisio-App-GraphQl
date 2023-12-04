@@ -3,14 +3,14 @@
         <v-layout>
             <v-flex>
                 <v-layout column class="ma-3">
-                    <h1 class="headline">Consultar Perfis</h1>
+                    <h1 class="headline">Consultar Paciente</h1>
                     <v-divider class="mb-3" />
                         <div v-if="erros">
                             <Erros :erros="erros" />
                         </div>
                         <v-text-field label="ID"
                             v-model.number="filtro.id" />
-                        <v-text-field label="Nome"
+                        <v-text-field label="nome"
                             v-model="filtro.nome" />
                         <v-btn color="primary" class="ml-0 mt-3"
                             @click="consultar">
@@ -27,8 +27,8 @@
                             v-model="dados.id" />
                         <v-text-field label="Nome" readonly
                             v-model="dados.nome" />
-                        <v-text-field label="Rótulo" readonly
-                            v-model="dados.rotulo" />
+                       <v-text-field label="Usuarios" readonly
+                            :value="usuariosNomes" />
                     </template>
                 </v-layout>
             </v-flex>
@@ -38,55 +38,57 @@
 
 <script>
 import Erros from '../comum/Erros'
-import gql from 'graphql-tag'
+import gql from    'graphql-tag'
 
 export default {
     components: { Erros },
     data() {
         return {
             filtro: {},
-             dados: null,
+            usuarios: [],
+            dados: null,
             erros: null
         }
     },
     computed: {
-        perfisRotulos() {
-            return this.dados && this.dados.perfis &&
-                this.dados.perfis.map(p => p.rotulo).join(', ')
+        usuariosNomes() {
+            return this.dados && this.dados.usuarios &&
+                this.dados.usuarios.map(p => p.nome).join(', ')
         }
     },
     methods: {
-        consultar() {
+        consultar() {            
             this.$api.query({
                 query: gql `
                     query(
                         $id: Int
                         $nome: String
                     ){
-                        perfil(
+                        paciente(
                             filtro:{
                                 id: $id
                                 nome: $nome
                             }
                         ){
-                            id nome rotulo
+                            id nome usuarios{nome}
                         }
                     }
 
                 ` ,
                 variables: {
                     id: this.filtro.id,
-                   nome: this.filtro.nome
+                    nome: this.filtro.nome
                 },
                 fetchPolicy: 'network-only'
 
             }).then(resultado =>{
-                this.dados = resultado.data.perfil
+                this.dados = resultado.data.paciente
                 this.filtro ={}
                 this.erros= null
             }).catch(e=> {
                 this.erros = e
             })
+
         }
     }
 }

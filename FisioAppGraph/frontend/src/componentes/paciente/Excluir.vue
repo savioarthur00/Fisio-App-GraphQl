@@ -3,19 +3,19 @@
         <v-layout>
             <v-flex>
                 <v-layout column class="ma-3">
-                    <h1 class="headline">Excluir Perfil</h1>
+                    <h1 class="headline">Excluir Paciente</h1>
                     <v-divider class="mb-3" />
                     <div v-if="erros">
                         <Erros :erros="erros" />
                     </div>
                     <v-text-field label="ID"
                         v-model.number="filtro.id" />
-                    <v-text-field label="Nome"
+                    <v-text-field label="nome"
                         v-model="filtro.nome" />
 
                     <v-btn color="error" class="ml-0 mt-3"
-                        @click="excluirPerfil">
-                        Excluir Perfil
+                        @click="excluirPaciente">
+                        Excluir Paciente
                     </v-btn>
                 </v-layout>
             </v-flex>
@@ -28,8 +28,7 @@
                             v-model="dados.id" />
                         <v-text-field label="Nome" readonly
                             v-model="dados.nome" />
-                        <v-text-field label="Rótulo" readonly
-                            v-model="dados.rotulo" />
+                        
                     </template>
                 </v-layout>
             </v-flex>
@@ -51,7 +50,7 @@ export default {
         }
     },
     methods: {
-        excluirPerfil() {
+        excluirPaciente() {
             this.$api.mutate({
                 mutation: gql `
                     mutation(
@@ -59,13 +58,13 @@ export default {
                         $nome: String
 
                     ){
-                        excluirPerfil(
+                        excluirPaciente(
                             filtro:{
                                 id: $id
                                 nome: $nome
                             }
                         ){
-                            id nome rotulo
+                            id nome 
                         }
                     }
                 `, variables: {
@@ -73,7 +72,7 @@ export default {
                     nome: this.filtro.nome
                 }
             }).then(resultado =>{
-                this.dados = resultado.data.excluirPerfil
+                this.dados = resultado.data.excluirPaciente
 
                 this.filtro ={}
                 this.erros = null

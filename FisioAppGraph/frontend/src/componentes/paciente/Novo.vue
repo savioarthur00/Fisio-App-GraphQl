@@ -99,17 +99,7 @@
     data() {
       return {
 
-        paciente: {
-          nome: '',
-          dataDaAvaliacao: null, // Inicialmente vazio, para seleção
-          sexo: '',
-          estadocivil: '',
-          idade: '',
-          raca: '',
-          dataDoNascimento: null, // Inicialmente vazio, para seleção
-          diagnosticoClinico: '',
-          usuarioSelecionado: null
-        },
+        paciente: {},
         dados: null,
         erros: null,
         usuarios: []
@@ -125,8 +115,8 @@
           );
     },
         usuariosSelecionados() {
-        if (this.paciente.usuarioSelecionado) {
-          return this.paciente.usuarioSelecionado.map(id => ({ id }));
+        if (this.paciente.usuarios) {
+          return this.paciente.usuarios.map(id => ({ id }));
         } else {
           return null;
         }
@@ -149,21 +139,29 @@
               $usuarios: [UsuarioFiltro]
             ){
               novoPaciente(
-                dados: {
-                  nome: $nome
-                  dataDaAvaliacao: $dataDaAvaliacao
-                  sexo: $sexo
-                  estadocivil: $estadocivil
-                  idade: $idade
-                  raca: $raca
-                  dataDoNascimento: $dataDoNascimento
-                  diagnosticoClinico: $diagnosticoClinico     
-                  usuarios: $usuarios
-                }
-              ){
-                id nome dataDaAvaliacao sexo idade raca dataDoNascimento diagnosticoClinico  estadocivil
-                usuarios {nome}
-              }
+            dados: {
+              nome: $nome
+              dataDaAvaliacao: $dataDaAvaliacao
+              sexo: $sexo
+              estadocivil: $estadocivil
+              idade: $idade
+              raca: $raca
+              dataDoNascimento: $dataDoNascimento
+              diagnosticoClinico: $diagnosticoClinico     
+              usuarios: $usuarios
+            }
+          ){
+            id nome
+            dataDaAvaliacao
+            sexo idade
+            raca dataDoNascimento
+            diagnosticoClinico
+            estadocivil
+            usuarios {
+              id
+              nome
+            }
+          }
             }
           `,
           variables: {

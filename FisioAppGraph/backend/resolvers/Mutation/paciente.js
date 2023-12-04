@@ -1,7 +1,6 @@
 const db = require('../../config/db')
 const { paciente: obterPaciente } = require('../Query/paciente')
 const { usuario: obterUsuario } = require('../Query/usuario')
-
 module.exports = {
     async novoPaciente(_, { dados }, ctx) {
         ctx && ctx.validarAdmin()

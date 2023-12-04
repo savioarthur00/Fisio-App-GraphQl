@@ -1,0 +1,17 @@
+
+type Evolucao{
+    id: Int
+    paciente: Paciente
+    dataDaEvolucao: String
+    texto:String
+}
+input PacienteFiltro {
+    id: Int
+    paciente: Paciente
+}
+input PacienteInput {
+    paciente:Paciente 
+    dataDaEvolucao:String
+    texto:String
+}
+

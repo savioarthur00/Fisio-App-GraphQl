@@ -11,6 +11,48 @@
                     
 
             <v-text-field label="Nome" v-model="paciente.nome" />
+
+            <v-menu
+              ref="dataDoNascimentoMenu"
+              v-model="dataDoNascimentoMenu"
+              :close-on-content-click="false"
+              transition="scale-transition"
+              offset-y
+          >
+              <template v-slot:activator="{ on }">
+                  <v-text-field
+                      v-model="paciente.dataDoNascimento"
+                      label="Data de Nascimento"
+                      readonly
+                      v-on="on"
+                  ></v-text-field>
+              </template>
+              <v-date-picker v-model="paciente.dataDoNascimento" @input="calculateAge" no-title></v-date-picker>
+          </v-menu>
+          <v-text-field label="Idade" v-model="paciente.idade" readonly />
+
+
+
+            <v-select label="Sexo" v-model="paciente.sexo" :items="['M', 'F']" outlined></v-select>
+            <v-select
+                label="Estado Civil"
+                v-model="paciente.estadocivil"
+                :items="['Solteiro', 'Casado', 'Viúvo']"
+                outlined
+            ></v-select>
+                    
+            
+            <v-select
+                label="Raça"
+                v-model="paciente.raca"
+                :items="['Branco', 'Preto', 'Pardo', 'Indígena', 'Outro']"
+                outlined
+            ></v-select>
+
+            
+            <v-text-field label="Diagnóstico Clínico" v-model="paciente.diagnosticoClinico" />
+
+
             <v-menu
               ref="dataDaAvaliacaoMenu"
               v-model="dataDaAvaliacaoMenu"
@@ -28,28 +70,7 @@
               </template>
               <v-date-picker v-model="paciente.dataDaAvaliacao" no-title></v-date-picker>
             </v-menu>
-            <v-select label="Sexo" v-model="paciente.sexo" :items="['M', 'F']" outlined></v-select>
-            <v-text-field label="Estado Civil" v-model="paciente.estadocivil" />
-            <v-text-field label="Idade" v-model="paciente.idade" />
-            <v-text-field label="Raça" v-model="paciente.raca" />
-            <v-menu
-              ref="dataDoNascimentoMenu"
-              v-model="dataDoNascimentoMenu"
-              :close-on-content-click="false"
-              transition="scale-transition"
-              offset-y
-            >
-              <template v-slot:activator="{ on }">
-                <v-text-field
-                  v-model="paciente.dataDoNascimento"
-                  label="Data de Nascimento"
-                  readonly
-                  v-on="on"
-                ></v-text-field>
-              </template>
-              <v-date-picker v-model="paciente.dataDoNascimento" no-title></v-date-picker>
-            </v-menu>
-            <v-text-field label="Diagnóstico Clínico" v-model="paciente.diagnosticoClinico" />
+
             <v-select label="Usuarios"
                             v-model="paciente.usuarios"
                             :items="usuarios"
@@ -124,6 +145,18 @@
 
     },
     methods: {
+      calculateAge() {
+        const birthDate = new Date(this.paciente.dataDoNascimento);
+        const currentDate = new Date();
+        const age = currentDate.getFullYear() - birthDate.getFullYear();
+
+       
+        if (currentDate.getMonth() < birthDate.getMonth() || (currentDate.getMonth() === birthDate.getMonth() && currentDate.getDate() < birthDate.getDate())) {
+            this.paciente.idade = age - 1;
+        } else {
+            this.paciente.idade = age;
+        }
+    },
       novoPaciente() {
         this.$api.mutate({
           mutation: gql `

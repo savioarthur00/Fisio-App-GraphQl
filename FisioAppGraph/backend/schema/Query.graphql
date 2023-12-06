@@ -7,4 +7,10 @@ type Query {
     perfil(filtro: PerfilFiltro!): Perfil
     pacientes: [Paciente]
     paciente(filtro:PacienteFiltro!):Paciente
+     evolucoes: [Evolucao]
+    evolucao(filtro:EvolucaoFiltro!):Evolucao
+     cardioRespiratorios: [CardioRespiratorio]
+    cardioRespiratorio(filtro:CardioRespiratorioFiltro!):CardioRespiratorio
+
+
 }

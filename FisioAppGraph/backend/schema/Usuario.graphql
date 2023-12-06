@@ -106,7 +106,6 @@ input EvolucaoInput {
     usuarios:[UsuarioFiltro] 
 }
 
-
 type CardioRespiratorio{
     id: Int
     pacientes: [Paciente]   
@@ -152,7 +151,7 @@ input CardioRespiratorioFiltro{
     paciente: PacienteFiltro
 }
 
-input CardioRespiratorio{
+input CardioRespiratorioInput{
     pacientes: [PacienteFiltro]  
     fc:String
     fR: String

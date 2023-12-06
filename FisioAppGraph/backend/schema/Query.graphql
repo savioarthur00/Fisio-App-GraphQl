@@ -9,8 +9,8 @@ type Query {
     paciente(filtro:PacienteFiltro!):Paciente
      evolucoes: [Evolucao]
     evolucao(filtro:EvolucaoFiltro!):Evolucao
-     cardioRespiratorios: [CardioRespiratorio]
-    cardioRespiratorio(filtro:CardioRespiratorioFiltro!):CardioRespiratorio
+     exames: [Exame]
+    exame(filtro:ExameFiltro!):Exame
 
 
 }

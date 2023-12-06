@@ -46,21 +46,21 @@ type Mutation {
         dados: PacienteInput!
     ): Paciente
 
-    #Mutations de CardioRespiratorio 
-    novoCardioRespiratorio(
-        dados:  CardioRespiratorioInput!
-    ):  CardioRespiratorio!
+    #Mutations de Exame 
+    novoExame(
+        dados:  ExameInput!
+    ):  Exame!
 
-    excluirCardioRespiratorio(
-        filtro:  CardioRespiratorioFiltro!
-    ):  CardioRespiratorio
+    excluirExame(
+        filtro:  ExameFiltro!
+    ):  Exame
 
-    alterarCardioRespiratorio(
-        filtro:  CardioRespiratorioFiltro!
-        dados:  CardioRespiratorioInput!
-    ):  CardioRespiratorio
+    alterarExame(
+        filtro:  ExameFiltro!
+        dados:  ExameInput!
+    ):  Exame
 
-    #Mutations de CardioRespiratorio 
+    #Mutations de Evolucao
     novoEvolucao(
         dados:  EvolucaoInput!
     ):  Evolucao!

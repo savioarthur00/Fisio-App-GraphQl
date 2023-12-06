@@ -9,24 +9,20 @@ module.exports = {
         ctx && ctx.validarAdmin()
         
         if(!filtro) return null
-        const { id, dataEvolucao, pacientes, usuarios } = filtro
+        const { id, nome, pacientes } = filtro
         if(id) {
             return db('cardiorespiratorios')
                 .where({ id })
                 .first()
         } else if(dataEvolucao) {
             return db('cardiorespiratorios')
-                .where({ dataEvolucao })
+                .where({ nome })
                 .first()
         } else if(pacientes) {
             return db('cardiorespiratorios')
-                .where({ pacientes })
+                .whereIn('paciente_id', pacientes)
                 .first()
-        } else if(usuarios) {
-            return db('cardiorespiratorios')
-                .where({ usuarios })
-                .first()
-        } else {
+        }  else {
             return null
         }
     }

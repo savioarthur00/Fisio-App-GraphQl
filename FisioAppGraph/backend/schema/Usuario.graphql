@@ -1,3 +1,4 @@
+
 type Usuario {
     id: Int
     nome: String!
@@ -58,6 +59,7 @@ type Paciente{
     dataDoNascimento: String
     diagnosticoClinico: String 
     usuarios: [Usuario]  
+    evolucoes: [Evolucao]
 }
 
 input PacienteFiltro {
@@ -76,3 +78,118 @@ input PacienteInput {
     diagnosticoClinico: String
     usuarios: [UsuarioFiltro]  
 }
+
+
+type Evolucao{
+    id: Int
+    pacientes: [Paciente]
+    dataDaEvolucao: String
+    descricaoDoEstadoGeral: String
+    condutaAplicada: String
+    eventuaisIntercorrencias: String
+    texto:String
+    usuarios:[Usuario] 
+}
+input EvolucaoFiltro {
+    id: Int
+    paciente: PacienteFiltro
+    dataDaEvolucao: String
+    usuarios: UsuarioFiltro
+}
+input EvolucaoInput {
+    pacientes:[PacienteFiltro]
+    dataDaEvolucao:String
+    descricaoDoEstadoGeral: String
+    condutaAplicada: String
+    eventuaisIntercorrencias: String
+    texto:String
+    usuarios:[UsuarioFiltro] 
+}
+
+
+type CardioRespiratorio{
+    id: Int
+    pacientes: [Paciente]   
+    fc:String
+    fR: String
+    pA:String
+    spO2: Int
+    temperatura: Int
+    peso: Float
+    altura: Float
+    iMC: Float
+    auscultaPulmonar: String
+    consciencia: String
+    formatoTorax:String
+    outros: String
+    viaDeAcessoDoAr: String
+    usoDeOxigenoterapia: String
+    horario_usoDeOxigenoterapia: String
+    fiO2: String
+    padraoMuscularVentilatorio: String
+    ritmoVentilatorio: String
+    expansibilidadeToracica: String
+    expansibilidadeToracica_Assimetrica: String
+    sinais: String
+    demaisSinais: String
+    sintomas: String
+    demaisSintomas: String
+    usoDeMusculaturaAcessoria: String
+    tosse:String
+    secrecao: String
+    dispneia: String
+    borg: String
+    classificacao: String
+    escalaModificadaDoMRC_Pacientes_Portadores_DPOC:String
+    cianose: String
+    avaliacaoPostural: String
+    palpacao: String   
+    usuarios: [Usuario] 
+}
+
+input CardioRespiratorioFiltro{
+    id: Int
+    paciente: PacienteFiltro
+}
+
+input CardioRespiratorio{
+    pacientes: [PacienteFiltro]  
+    fc:String
+    fR: String
+    pA:String
+    spO2: Int
+    temperatura: Int
+    peso: Float
+    altura: Float
+    iMC: Float
+    auscultaPulmonar: String
+    consciencia: String
+    formatoTorax:String
+    outros: String
+    viaDeAcessoDoAr: String
+    usoDeOxigenoterapia: String
+    horario_usoDeOxigenoterapia: String
+    fiO2: String
+    padraoMuscularVentilatorio: String
+    ritmoVentilatorio: String
+    expansibilidadeToracica: String
+    expansibilidadeToracica_Assimetrica: String
+    sinais: String
+    demaisSinais: String
+    sintomas: String
+    demaisSintomas: String
+    usoDeMusculaturaAcessoria: String
+    tosse:String
+    secrecao: String
+    dispneia: String
+    borg: String
+    classificacao: String
+    escalaModificadaDoMRC_Pacientes_Portadores_DPOC:String
+    cianose: String
+    avaliacaoPostural: String
+    palpacao: String   
+    usuarios: [UsuarioFiltro] 
+}
+
+
+

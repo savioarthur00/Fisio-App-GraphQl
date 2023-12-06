@@ -92,7 +92,7 @@ type Evolucao{
 }
 input EvolucaoFiltro {
     id: Int
-    paciente: PacienteFiltro
+    pacientes: PacienteFiltro
     dataDaEvolucao: String
     usuarios: UsuarioFiltro
 }

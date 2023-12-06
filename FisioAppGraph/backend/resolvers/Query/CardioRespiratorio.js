@@ -1,30 +1,30 @@
 const db = require('../../config/db')
 
 module.exports = {
-    evolucoes(parent, args, ctx) {
+    cardiorespiratorios(parent, args, ctx) {
         ctx && ctx.validarAdmin()
-        return db('evolucoes')
+        return db('cardiorespiratorios')
     },
-    evolucao(_, { filtro }, ctx) {
+    cardiorespiratorio(_, { filtro }, ctx) {
         ctx && ctx.validarAdmin()
         
         if(!filtro) return null
         const { id, dataEvolucao, pacientes, usuarios } = filtro
         if(id) {
-            return db('evolucoes')
+            return db('cardiorespiratorios')
                 .where({ id })
                 .first()
         } else if(dataEvolucao) {
-            return db('evolucoes')
+            return db('cardiorespiratorios')
                 .where({ dataEvolucao })
                 .first()
         } else if(pacientes) {
-            return db('evolucoes')
-                .whereIn('paciente_id', pacientes)
+            return db('cardiorespiratorios')
+                .where({ pacientes })
                 .first()
         } else if(usuarios) {
-            return db('evolucoes')
-                .whereIn('usuario_id', usuarios)
+            return db('cardiorespiratorios')
+                .where({ usuarios })
                 .first()
         } else {
             return null

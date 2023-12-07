@@ -1,6 +1,5 @@
 const db = require('../../config/db')
 const { evolucao: obterEvolucao } = require('../Query/evolucao')
-const { usuario: obterUsuario } = require('../Query/usuario')
 const {paciente: obterPaciente}= require('../Query/paciente')
 module.exports = {
     async novoEvolucao(_, { dados }, ctx) {

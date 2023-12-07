@@ -1,17 +1,21 @@
 const db = require('../../config/db')
 const { evolucao: obterEvolucao } = require('../Query/evolucao')
 const {paciente: obterPaciente}= require('../Query/paciente')
+
+
 module.exports = {
     async novoEvolucao(_, { dados }, ctx) {
         ctx && ctx.validarAdmin()
 
         const idsPacientes = []
+       
 
             if(!dados.pacientes || !dados.pacientes.length) {
                 dados.pacientes = [{
                     nome: 'Sem paciente'
                 }]
             }
+            
 
             for(let filtro of dados.pacientes) {
                 const paciente = await obterPaciente(_, {

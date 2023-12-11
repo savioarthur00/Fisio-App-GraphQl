@@ -13,7 +13,7 @@
 				</v-tab>
 
 				<v-tab>
-					Fisioterapeutas
+					Usuarios
 					<v-icon>people</v-icon>
 				</v-tab>
 
@@ -24,6 +24,11 @@
 
 				<v-tab>
 					Pacientes
+					<v-icon>people</v-icon>
+				</v-tab>
+
+				<v-tab>
+					Evoluções
 					<v-icon>people</v-icon>
 				</v-tab>
 
@@ -38,10 +43,16 @@
 				<v-tab-item>
 					<PerfilAbas />
 				</v-tab-item>
+
 				<v-tab-item>
-					<PacienteAbas />
-					
+					<PacienteAbas />					
 				</v-tab-item>
+
+				<v-tab-item>
+					<EvolucaoAbas />					
+				</v-tab-item>
+
+
 			</v-tabs>
 		</v-flex>
 	</v-layout>
@@ -53,6 +64,7 @@ import UsuarioLogado from './autenticacao/UsuarioLogado'
 import UsuarioAbas from './usuario/Abas'
 import PerfilAbas from './perfil/Abas'
 import PacienteAbas from './paciente/Abas'
+import EvolucaoAbas from './evolucao/Abas'
 
 export default {
 	components: {
@@ -60,7 +72,8 @@ export default {
 		UsuarioLogado,
 		UsuarioAbas,
 		PerfilAbas,
-		PacienteAbas
+		PacienteAbas,
+		EvolucaoAbas
 	},
 }
 </script>

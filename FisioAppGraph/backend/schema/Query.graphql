@@ -7,9 +7,9 @@ type Query {
     perfil(filtro: PerfilFiltro!): Perfil
     pacientes: [Paciente]
     paciente(filtro:PacienteFiltro!):Paciente
-     evolucoes: [Evolucao]
+    evolucoes: [Evolucao]
     evolucao(filtro:EvolucaoFiltro!):Evolucao
-     exames: [Exame]
+    exames: [Exame]
     exame(filtro:ExameFiltro!):Exame
 
 

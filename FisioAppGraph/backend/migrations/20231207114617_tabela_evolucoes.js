@@ -3,7 +3,6 @@
 exports.up = function(knex, Promise) {
     return knex.schema.createTable('evolucoes', table => {
         table.increments('id').primary()
-        table.string('nome').notNull().unique()
         table.string('dataDaEvolucao')
         table.string('descricaoDoEstadoGeral')
         table.string('condutaAplicada')

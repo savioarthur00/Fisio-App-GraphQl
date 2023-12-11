@@ -103,7 +103,7 @@ input EvolucaoInput {
     condutaAplicada: String
     eventuaisIntercorrencias: String
     texto:String
-    usuarios:[UsuarioFiltro] 
+    
 }
 
 type Exame{

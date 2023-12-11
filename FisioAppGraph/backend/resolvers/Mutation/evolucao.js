@@ -3,19 +3,18 @@ const { evolucao: obterEvolucao } = require('../Query/evolucao')
 const {paciente: obterPaciente}= require('../Query/paciente')
 
 
+
 module.exports = {
     async novoEvolucao(_, { dados }, ctx) {
         ctx && ctx.validarAdmin()
 
         const idsPacientes = []
-       
 
             if(!dados.pacientes || !dados.pacientes.length) {
                 dados.pacientes = [{
-                    nome: 'Sem paciente'
+                    nome: 'Sem atendente'
                 }]
             }
-            
 
             for(let filtro of dados.pacientes) {
                 const paciente = await obterPaciente(_, {
@@ -31,7 +30,7 @@ module.exports = {
 
             for(let paciente_id of idsPacientes) {
                 await db('pacientes_evolucoes')
-                    .insert({ paciente_id, evolucoes_id: id })
+                    .insert({ paciente_id, evolucao_id: id })
             }
 
             return db('evolucoes')
@@ -42,7 +41,7 @@ module.exports = {
             throw new Error(e.sqlMessage)
         }
     },
-
+    
 
     async excluirEvolucao(_, args, ctx) {
         ctx && ctx.validarAdmin()

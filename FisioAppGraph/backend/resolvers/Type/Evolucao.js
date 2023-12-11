@@ -5,7 +5,7 @@ module.exports = {
         return db('pacientes')
             .join(
                 'pacientes_evolucoes',
-                'paciente.id',
+                'pacientes.id',
                 'pacientes_evolucoes.paciente_id'
             )
             .where({ evolucao_id: evolucao.id })

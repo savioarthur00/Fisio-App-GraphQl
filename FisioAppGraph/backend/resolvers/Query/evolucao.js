@@ -9,7 +9,7 @@ module.exports = {
         ctx && ctx.validarAdmin()
         
         if(!filtro) return null
-        const { id, dataEvolucao, pacientes, usuarios } = filtro
+        const { id, dataEvolucao } = filtro
         if(id) {
             return db('evolucoes')
                 .where({ id })
@@ -18,15 +18,7 @@ module.exports = {
             return db('evolucoes')
                 .where({ dataEvolucao })
                 .first()
-        } else if(pacientes) {
-            return db('evolucoes')
-                .whereIn('paciente_id', pacientes)
-                .first()
-        } else if(usuarios) {
-            return db('evolucoes')
-                .whereIn('usuario_id', usuarios)
-                .first()
-        } else {
+        }else {
             return null
         }
     }

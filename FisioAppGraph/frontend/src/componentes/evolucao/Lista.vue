@@ -3,8 +3,8 @@
         <v-layout column>
             <v-flex>
                 <v-btn color="primary" class="ml-0 mb-4"
-                    @click="obterPacientes">
-                    Obter Pacientes
+                    @click="obterEvolucoes">
+                    Obter Evoluções
                 </v-btn>
             </v-flex>
             <v-flex>
@@ -13,14 +13,16 @@
                 </div>
             </v-flex>
             <v-flex>
-                <v-data-table :headers="headers" :items="pacientes" 
+                <v-data-table :headers="headers" :items="evolucoes" 
                     hide-actions class="elevation-1">
                     <template slot="items" slot-scope="props">
                         <td>{{ props.item.id }}</td>
-                        <td>{{ props.item.nome }}</td>
-                        <td>{{ props.item.usuarios
+                        
+                        <td>{{ props.item.pacientes
                                 .map(p => p.nome)
                                 .join(', ') }}</td>
+
+                        <td>{{ props.item.texto }}</td>
                     </template>
                 </v-data-table>
             </v-flex>
@@ -37,22 +39,22 @@ export default {
     data() {
         return {
             erros: null,
-            pacientes: [],
+            evolucoes: [],
             headers: [
                 { text: 'ID', value: 'id' },
-                { text: 'Nome', value: 'nome' },
-                { text: 'Usuarios', value: 'usuarios' },
+                { text: 'Paciente', value: 'pacientes' },
+                { text: 'Texto', value: 'texto' },
             ],
         }
     },
     methods: {
-        obterPacientes() {
+        obterEvolucoes() {
             this.$api.query({
                 query: gql `
                 
                     query{
-                        pacientes {
-                            id nome  usuarios {nome}
+                        evolucoes {
+                            id pacientes {nome} texto
                         }
                     }
                 
@@ -61,10 +63,10 @@ export default {
 
 
             }).then(resultado =>{
-                this.pacientes = resultado.data.pacientes
+                this.evolucoes = resultado.data.evolucoes
                 this.erros = null
             }).catch(e=>{
-                this.pacientes = []
+                this.evolucoes = []
                 this.erros = e
             })
         }

@@ -94,7 +94,8 @@ input EvolucaoFiltro {
     id: Int
     pacientes: PacienteFiltro
     dataDaEvolucao: String
-    usuarios: UsuarioFiltro
+    texto: String
+
 }
 input EvolucaoInput {
     pacientes:[PacienteFiltro]

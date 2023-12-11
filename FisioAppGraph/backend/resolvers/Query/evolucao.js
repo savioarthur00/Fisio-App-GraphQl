@@ -9,16 +9,18 @@ module.exports = {
         ctx && ctx.validarAdmin()
         
         if(!filtro) return null
-        const { id, dataEvolucao } = filtro
+        const { id, texto } = filtro
         if(id) {
             return db('evolucoes')
                 .where({ id })
                 .first()
-        } else if(dataEvolucao) {
+        }else if(texto) {
             return db('evolucoes')
-                .where({ dataEvolucao })
+                .where({ texto })
                 .first()
-        }else {
+        }
+       
+        else {
             return null
         }
     }

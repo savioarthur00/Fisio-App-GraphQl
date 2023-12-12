@@ -122,6 +122,7 @@ export default {
     components: { Erros },
     data() {
         return {
+           
             filtro: {},
             paciente: {},
             usuarios: [],

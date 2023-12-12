@@ -162,7 +162,7 @@
             eventuaisIntercorrencias
             texto
             pacientes{ 
-               id nome
+                id nome
             }
           }
           }

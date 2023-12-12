@@ -119,7 +119,7 @@
     components: { Erros },
     data() {
       return {
-
+        
         paciente: {},
         dados: null,
         erros: null,

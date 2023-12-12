@@ -9,5 +9,7 @@ module.exports = {
                 'pacientes_evolucoes.paciente_id'
             )
             .where({ evolucao_id: evolucao.id })
+            .select('pacientes.id', 'pacientes.nome')
     }
+    
 }

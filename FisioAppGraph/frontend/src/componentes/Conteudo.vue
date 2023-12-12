@@ -1,3 +1,4 @@
+
 <template>
 	<v-layout column>
 		<v-flex>
@@ -13,23 +14,27 @@
 				</v-tab>
 
 				<v-tab>
-					Usuarios
+					Fisioterapeutas
 					<v-icon>people</v-icon>
 				</v-tab>
-
 				<v-tab>
 					Perfis
-					<v-icon>how_to_reg</v-icon>
-				</v-tab>
+					<v-icon>people</v-icon>
+				</v-tab>				
 
 				<v-tab>
 					Pacientes
 					<v-icon>people</v-icon>
 				</v-tab>
-
+				
 				<v-tab>
 					Evoluções
-					<v-icon>people</v-icon>
+					<v-icon>arrow_upward</v-icon>
+				</v-tab>
+
+				<v-tab>
+					Exames
+					<v-icon>description</v-icon>
 				</v-tab>
 
 				<v-tab-item>
@@ -52,6 +57,10 @@
 					<EvolucaoAbas />					
 				</v-tab-item>
 
+				<v-tab-item>
+					<ExameAbas />					
+				</v-tab-item>
+
 
 			</v-tabs>
 		</v-flex>
@@ -65,6 +74,8 @@ import UsuarioAbas from './usuario/Abas'
 import PerfilAbas from './perfil/Abas'
 import PacienteAbas from './paciente/Abas'
 import EvolucaoAbas from './evolucao/Abas'
+import ExameAbas from './exame/Abas'
+
 
 export default {
 	components: {
@@ -73,7 +84,8 @@ export default {
 		UsuarioAbas,
 		PerfilAbas,
 		PacienteAbas,
-		EvolucaoAbas
+		EvolucaoAbas,
+		ExameAbas
 	},
 }
 </script>

@@ -18,11 +18,21 @@ module.exports = {
             return db('exames')
                 .where({ nome })
                 .first()
-        } else if(pacientes) {
+        } else if (pacientes && pacientes.length > 0) {
+            const conditions = pacientes.map((paciente) => ({
+              'pacientes.nome': paciente.nome,
+            }));
+        
             return db('exames')
-                .whereIn('paciente_id', pacientes)
-                .first()
-        }  else {
+              .join('pacientes_exames', 'exames.id', 'pacientes_exames.evolucao_id')
+              .join('pacientes', 'pacientes.id', 'pacientes_exames.paciente_id')
+              .where((builder) => {
+                conditions.forEach((condition) => {
+                  builder.orWhere(condition);
+                });
+              })
+              .first();
+          }  else {
             return null
         }
     }

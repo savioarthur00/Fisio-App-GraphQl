@@ -145,11 +145,12 @@ type Exame{
     cianose: String
     avaliacaoPostural: String
     palpacao: String   
-    usuarios: [Usuario] 
+     
 }
 
 input ExameFiltro{
     id: Int
+    nome:String
    
 }
 
@@ -190,7 +191,7 @@ input ExameInput{
     cianose: String
     avaliacaoPostural: String
     palpacao: String   
-    usuarios: [UsuarioFiltro] 
+    
 }
 
 

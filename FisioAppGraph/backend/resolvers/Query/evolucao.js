@@ -7,7 +7,7 @@ module.exports = {
   },
   evolucao(_, { filtro }, ctx) {
     ctx && ctx.validarAdmin();
-    console.log('Filtro:', filtro);
+    
 
     if (!filtro) return null;
     const { id, texto, pacientes } = filtro;

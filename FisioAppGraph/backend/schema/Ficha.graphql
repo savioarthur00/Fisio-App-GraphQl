@@ -1,0 +1,13 @@
+
+type Sinais {
+    id: Int
+    nome: String
+}
+
+input SinaisFiltro{
+    nome:String
+}
+
+input SinaisInput{
+    nome:String
+}

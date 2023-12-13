@@ -131,9 +131,9 @@ type Exame{
     ritmoVentilatorio: String
     expansibilidadeToracica: String
     expansibilidadeToracica_Assimetrica: String
-    sinais: [Sinais]
+    sinais: [Sinal]
     demaisSinais: String
-    sintomas: [Sintomas]
+    sintomas: [Sintoma]
     demaisSintomas: String
     usoDeMusculaturaAcessoria: String
     tosse:String
@@ -177,9 +177,9 @@ input ExameInput{
     ritmoVentilatorio: String
     expansibilidadeToracica: String
     expansibilidadeToracica_Assimetrica: String
-    sinais: [SinaisFiltro]
+    sinais: [SinalFiltro]
     demaisSinais: String
-    sintomas: [SintomasFiltro]
+    sintomas: [SintomaFiltro]
     demaisSintomas: String
     usoDeMusculaturaAcessoria: String
     tosse:String

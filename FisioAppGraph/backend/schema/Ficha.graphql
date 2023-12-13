@@ -1,28 +1,30 @@
 
-type Sinais {
+type Sinal {
     id: Int
     nome: String
+    exames:[Exame]
 }
 
-input SinaisFiltro{
+input SinalFiltro{
     id: Int
     nome:String
 }
 
-input SinaisInput{
+input SinalInput{
     nome:String
 }
 
-type Sintomas{
+type Sintoma{
     id: Int
     nome:String
+    exames:[Exame]
 }
 
-input SintomasFiltro{
+input SintomaFiltro{
     id:Int
     nome:String
 }
 
-input SintomasInput{
+input SintomaInput{
     nome:String
 }

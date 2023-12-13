@@ -1,4 +1,4 @@
-#import Sinais from 'Ficha.graphql'
+#import Sinais, Sintomas from 'Ficha.graphql'
 type Usuario {
     id: Int
     nome: String!
@@ -133,7 +133,7 @@ type Exame{
     expansibilidadeToracica_Assimetrica: String
     sinais: [Sinais]
     demaisSinais: String
-    sintomas: [String]
+    sintomas: [Sintomas]
     demaisSintomas: String
     usoDeMusculaturaAcessoria: String
     tosse:String
@@ -179,7 +179,7 @@ input ExameInput{
     expansibilidadeToracica_Assimetrica: String
     sinais: [SinaisFiltro]
     demaisSinais: String
-    sintomas: [String]
+    sintomas: [SintomasFiltro]
     demaisSintomas: String
     usoDeMusculaturaAcessoria: String
     tosse:String

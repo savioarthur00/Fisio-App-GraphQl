@@ -11,6 +11,10 @@ type Query {
     evolucao(filtro:EvolucaoFiltro!):Evolucao
     exames: [Exame]
     exame(filtro:ExameFiltro!):Exame
+    sinais: [Sinal]
+    sinal(filtro:SinalFiltro!):Sinal
+    sintomas: [Sintoma]
+    sintoma(filtro:SintomaFiltro!):Sintoma
 
 
 }

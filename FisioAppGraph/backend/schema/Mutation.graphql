@@ -75,6 +75,35 @@ type Mutation {
     ):  Evolucao
 
 
+#Mutations de Sinais
+    novoSinal(
+        dados:  SinalInput!
+    ):  Sinal!
+
+    excluirSinal(
+        filtro:  SinalFiltro!
+    ):  Sinal
+
+    alterarSinal(
+        filtro:  SinalFiltro!
+        dados:  SinalInput!
+    ):  Sinal
+
+#Mutations de Sintomas
+    novoSintoma(
+        dados:  SintomaInput!
+    ):  Sintoma!
+
+    excluirSintoma(
+        filtro:  SintomaFiltro!
+    ):  Sintoma
+
+    alterarSintoma(
+        filtro:  SintomaFiltro!
+        dados:  SintomaInput!
+    ):  Sintoma
+
+
 
 
 }

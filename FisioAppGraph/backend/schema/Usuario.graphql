@@ -1,4 +1,4 @@
-
+#import Sinais from 'Ficha.graphql'
 type Usuario {
     id: Int
     nome: String!
@@ -131,7 +131,7 @@ type Exame{
     ritmoVentilatorio: String
     expansibilidadeToracica: String
     expansibilidadeToracica_Assimetrica: String
-    sinais: [String]
+    sinais: [Sinais]
     demaisSinais: String
     sintomas: [String]
     demaisSintomas: String
@@ -177,7 +177,7 @@ input ExameInput{
     ritmoVentilatorio: String
     expansibilidadeToracica: String
     expansibilidadeToracica_Assimetrica: String
-    sinais: [String]
+    sinais: [SinaisFiltro]
     demaisSinais: String
     sintomas: [String]
     demaisSintomas: String

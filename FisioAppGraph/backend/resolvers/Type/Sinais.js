@@ -1,12 +1,12 @@
 const db = require('../../config/db')
 
 module.exports = {
-    pacientes(sinal) {
-        return db('pacientes')
+    exames(sinal) {
+        return db('exames')
             .join(
-                'pacientes_sinais',
-                'pacientes.id',
-                'pacientes_sinais.paciente_id'
+                'exames_sinais',
+                'exames.id',
+                'exames_sinais.exame_id'
             )
             .where({ sinal_id: sinal.id })
     }

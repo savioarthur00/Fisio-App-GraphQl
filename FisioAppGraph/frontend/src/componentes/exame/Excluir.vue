@@ -3,19 +3,19 @@
         <v-layout>
             <v-flex>
                 <v-layout column class="ma-3">
-                    <h1 class="headline">Excluir Evolução</h1>
+                    <h1 class="headline">Excluir Exame</h1>
                     <v-divider class="mb-3" />
                     <div v-if="erros">
                         <Erros :erros="erros" />
                     </div>
                     <v-text-field label="ID"
                         v-model.number="filtro.id" />
-                    <v-text-field label="texto"
-                        v-model="filtro.texto" />
+                    <v-text-field label="nome"
+                        v-model="filtro.nome" />
 
                     <v-btn color="error" class="ml-0 mt-3"
-                        @click="excluirEvolucao">
-                        Excluir Evolução
+                        @click="excluirExame">
+                        Excluir Exame
                     </v-btn>
                 </v-layout>
             </v-flex>
@@ -26,8 +26,8 @@
                     <template v-if="dados">
                         <v-text-field label="ID" readonly
                             v-model="dados.id" />
-                        <v-text-field label="Texto" readonly
-                            v-model="dados.texto" />
+                        <v-text-field label="Nome" readonly
+                            v-model="dados.nome" />
                         
                     </template>
                 </v-layout>
@@ -50,29 +50,29 @@ export default {
         }
     },
     methods: {
-        excluirEvolucao() {
+        excluirExame() {
             this.$api.mutate({
                 mutation: gql `
                     mutation(
                         $id: Int 
-                        $texto: String
+                        $nome: String
 
                     ){
                         excluirEvolucao(
                             filtro:{
                                 id: $id
-                                texto: $texto
+                                nome: $nome
                             }
                         ){
-                            id texto
+                            id nome
                         }
                     }
                 `, variables: {
                     id: this.filtro.id,
-                    texto: this.filtro.texto
+                    nome: this.filtro.nome
                 }
             }).then(resultado =>{
-                this.dados = resultado.data.excluirEvolucao
+                this.dados = resultado.data.excluirExame
 
                 this.filtro ={}
                 this.erros = null

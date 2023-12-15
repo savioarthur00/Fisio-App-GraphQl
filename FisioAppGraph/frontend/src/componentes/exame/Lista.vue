@@ -3,8 +3,8 @@
       <v-layout column>
           <v-flex>
               <v-btn color="primary" class="ml-0 mb-4"
-                  @click="obterEvolucoes">
-                  Obter Evoluções
+                  @click="obterExames">
+                  Obter Exames
               </v-btn>
           </v-flex>
           <v-flex>
@@ -13,7 +13,7 @@
               </div>
           </v-flex>
           <v-flex>
-              <v-data-table :headers="headers" :items="evolucoes" 
+              <v-data-table :headers="headers" :items="exames" 
                   hide-actions class="elevation-1">
                  
                   <template slot="items" slot-scope="props">
@@ -23,7 +23,7 @@
                       <td>{{ props.item.pacientes
                               .map(p => p.nome)
                               .join(', ') }}</td>
-                      <td>{{ props.item.texto}}</td>
+                      <td>{{ props.item.nome}}</td>
                       
                   </template>
               </v-data-table>
@@ -41,21 +41,21 @@ export default {
   data() {
       return {
           erros: null,
-          evolucoes:[],
+          exames:[],
           headers: [
               { text: 'ID', value: 'id' },
               { text: 'Pacientes', value: 'pacientes' },
-              { text: 'Texto', value: 'texto' },
+              { text: 'Nome', value: 'nome' },
           ],
       }
   },
   methods: {
-      obterEvolucoes () {
+      obterExames () {
           this.$api.query({
               query: gql `
               
                   query{
-                    evolucoes  {
+                    exames  {
                           id texto pacientes {nome}
                       }
                   }
@@ -68,16 +68,16 @@ export default {
 
           }).then(resultado =>{
             console.log('Resultado:', resultado);
-            this.evolucoes = resultado.data.evolucoes;
+            this.exames = resultado.data.exames;
             this.erros = null;
           }).catch(e=>{
-              this.evolucoes  = []
+              this.exames  = []
               this.erros = e
           })
       }
   }
 }
-</script>
+</script> 
 
 <style>
 

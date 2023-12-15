@@ -4,6 +4,7 @@ const paciente = require('./paciente')
 const evolucao = require('./evolucao')
 const exame = require('./Exame')
 const sinal = require('./sinal')
+const sintoma = require('./sintoma')
 
  module.exports = {
     ...usuario,
@@ -11,5 +12,6 @@ const sinal = require('./sinal')
     ...paciente,
     ...evolucao,
     ...exame,
-    ...sinal
+    ...sinal,
+    ...sintoma
  }

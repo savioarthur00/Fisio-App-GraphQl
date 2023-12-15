@@ -99,16 +99,22 @@
                         
             <v-text-field label="Quanto de Expansibilidade Torácica Assimétrica" v-model="exame.expansibilidadeToracica_Assimetrica" />
 
-
+          
             <v-select
               label="Sinais"
               v-model="exame.sinais"
-              :items="['Cianose', 'Edema', 'Palidez', 'Tiragem', 'Batimento da Asa do Nariz', 'Aumento da FR', 'Gemido']"
-              attach
-              multiple
-              chips
-              deletable-chips
+                      :items="sinais"
+                      item-value="id"
+                      item-text="nome"
+                      attach
+                      multiple
+                      chips
+                      deletable-chips
             />
+            <v-btn class="ml-0 mt-3"
+                            @click="obterSinais">
+                            Selecionar Sinais
+            </v-btn>
 
 
             <v-text-field label="Demais Sinais" v-model="exame.demaisSinais" />
@@ -119,12 +125,18 @@
             <v-select
               label="Sintomas"
               v-model="exame.sintomas"
-              :items="['Dispneia', 'Dor', 'Tontura']"
-              attach
-              multiple
-              chips
-              deletable-chips
+                      :items="sintomas"
+                      item-value="id"
+                      item-text="nome"
+                      attach
+                      multiple
+                      chips
+                      deletable-chips
             />
+            <v-btn class="ml-0 mt-3"
+                            @click="obterSintomas">
+                            Selecionar Sintomas
+            </v-btn>
 
 
             <v-text-field label="Demais Sintomas" v-model="exame.demaisSintomas" />
@@ -175,7 +187,7 @@
             <v-text-field label="Avaliação Postural" v-model="exame.avaliacaoPostural" />
             <v-text-field label="Palpação" v-model="exame.palpacao" />
 
-            
+             
            
             <v-btn color="primary" class="ml-0 mt-3" @click="novoExame">
               Adicionar Exame
@@ -213,9 +225,9 @@
               <v-text-field label="Ritmo Ventilatório" readonly v-model="dados.ritmoVentilatorio" />
               <v-text-field label="Expansibilidade Torácica" readonly v-model="dados.expansibilidadeToracica" />
               <v-text-field label="Expansibilidade Torácica Assimétrica" readonly v-model="dados.expansibilidadeToracica_Assimetrica" />
-              <v-text-field label="Sinais" readonly :value="dados.sinais" />
+              <v-text-field label="Sinais" readonly :value="sinaisNomes" />
               <v-text-field label="Demais Sinais" readonly v-model="dados.demaisSinais" />
-              <v-text-field label="Sintomas" readonly :value="dados.sintomas" />
+              <v-text-field label="Sintomas" readonly :value="sintomasNomes" />
               <v-text-field label="Demais Sintomas" readonly v-model="dados.demaisSintomas" />
               <v-text-field label="Uso de Musculatura Acessória" readonly v-model="dados.usoDeMusculaturaAcessoria" />
               <v-text-field label="Tosse" readonly v-model="dados.tosse" />
@@ -247,6 +259,8 @@
         pacientes: [],
         dados: null,
         erros: null,
+        sinais: [], 
+        sintomas: [],
        
       }
     },
@@ -260,10 +274,38 @@
             this.dados.pacientes.map(p => p.nome).join(', ')
           );
     },
+    sinaisNomes() {
+          return (
+            this.dados &&
+            this.dados.sinais &&
+            this.dados.sinais.map(p => p.nome).join(', ')
+          );
+    },
+    sintomasNomes() {
+          return (
+            this.dados &&
+            this.dados.sintomas &&
+            this.dados.sintomas.map(p => p.nome).join(', ')
+          );
+    },
     
     pacientesSelecionados() {
         if (Array.isArray(this.exame.pacientes)) {
             return this.exame.pacientes.map(id => ({ id }));
+        } else {
+            return null;
+        }
+    },
+    sintomasSelecionados() {
+        if (Array.isArray(this.exame.sintomas)) {
+            return this.exame.sintomas.map(id => ({ id }));
+        } else {
+            return null;
+        }
+    },
+    sinaisSelecionados() {
+        if (Array.isArray(this.exame.sinais)) {
+            return this.exame.sinais.map(id => ({ id }));
         } else {
             return null;
         }
@@ -298,9 +340,9 @@
             $ritmoVentilatorio: String
             $expansibilidadeToracica: String
             $expansibilidadeToracica_Assimetrica: String
-            $sinais: [String]
+            $sinais: [SinalFiltro]
             $demaisSinais: String
-            $sintomas: [String]
+            $sintomas: [SintomaFiltro]
             $demaisSintomas: String
             $usoDeMusculaturaAcessoria: String
             $tosse:String
@@ -387,9 +429,13 @@
             ritmoVentilatorio
             expansibilidadeToracica
             expansibilidadeToracica_Assimetrica
-            sinais
+            sinais{
+              nome
+            }
             demaisSinais
-            sintomas
+            sintomas {
+              nome
+            }
             demaisSintomas
             usoDeMusculaturaAcessoria
             tosse
@@ -427,9 +473,9 @@
           ritmoVentilatorio: this.exame.ritmoVentilatorio,
           expansibilidadeToracica: this.exame.expansibilidadeToracica,
           expansibilidadeToracica_Assimetrica: this.exame.expansibilidadeToracica_Assimetrica,
-          sinais: this.exame.sinais,
+          sinais: this.sinaisSelecionados,
           demaisSinais: this.exame.demaisSinais,
-          sintomas: this.exame.sintomas,
+          sintomas: this.sintomasSelecionados,
           demaisSintomas: this.exame.demaisSintomas,
           usoDeMusculaturaAcessoria: this.exame.usoDeMusculaturaAcessoria,
           tosse: this.exame.tosse,
@@ -457,6 +503,30 @@
             query: gql ` {pacientes {id nome}} `
         }).then(resultado => {
             this.pacientes = resultado.data.pacientes
+            this.erros = null
+        }).catch(e=> {
+            this.erros = e
+        })
+            
+        },
+
+        obterSinais() {
+        this.$api.query({
+            query: gql ` {sinais {id nome}} `
+        }).then(resultado => {
+            this.sinais = resultado.data.sinais
+            this.erros = null
+        }).catch(e=> {
+            this.erros = e
+        })
+            
+        },
+        obterSintomas() {
+        this.$api.query({
+            query: gql ` {sintomas {id nome}} `
+        }).then(resultado => {
+            console.log(resultado.data.sintomas);
+            this.sintomas = resultado.data.sintomas
             this.erros = null
         }).catch(e=> {
             this.erros = e

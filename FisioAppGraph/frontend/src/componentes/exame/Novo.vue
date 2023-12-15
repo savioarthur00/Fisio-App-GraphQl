@@ -410,9 +410,9 @@
             }
             nome
             fc
-            fR
-            pA
-            spO2
+            fr
+            pa
+            spo2
             temperatura
             peso
             altura

@@ -56,7 +56,7 @@ export default {
               
                   query{
                     exames  {
-                          id texto pacientes {nome}
+                          id nome pacientes {nome}
                       }
                   }
               

@@ -23,9 +23,9 @@
               <v-text-field label="Pacientes" readonly:value="pacientesNomes" />
               <v-text-field label="Nome" readonly v-model="dados.nome" />
               <v-text-field label="FC" readonly v-model="dados.fc" />
-              <v-text-field label="FR" readonly v-model="dados.fR" />
-              <v-text-field label="PA" readonly v-model="dados.pA" />
-              <v-text-field label="SpO2" readonly v-model="dados.spO2" />
+              <v-text-field label="FR" readonly v-model="dados.fr" />
+              <v-text-field label="PA" readonly v-model="dados.pa" />
+              <v-text-field label="SpO2" readonly v-model="dados.spo2" />
               <v-text-field label="Temperatura" readonly v-model="dados.temperatura" />
               <v-text-field label="Peso" readonly v-model="dados.peso" />
               <v-text-field label="Altura" readonly v-model="dados.altura" />
@@ -101,13 +101,13 @@
                 }
                 nome
                 fc
-                fR
-                pA
-                spO2
+                fr
+                pa
+                spo2
                 temperatura
                 peso
                 altura
-                iMC
+                imc
                 auscultaPulmonar
                 consciencia
                 formatoTorax

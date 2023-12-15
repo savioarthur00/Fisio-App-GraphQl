@@ -89,6 +89,10 @@ module.exports = {
                 const { id } = exame
                 await db('pacientes_exames')
                     .where({ exame_id: id }).delete()
+                await db('exames_sinais')
+                    .where({ exame_id: id }).delete()
+                await db('exames_sintomas')
+                    .where({ exame_id: id }).delete()
                 await db('exames')
                     .where({ id }).delete()
             }

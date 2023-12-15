@@ -58,7 +58,7 @@ export default {
                         $nome: String
 
                     ){
-                        excluirEvolucao(
+                        excluirExame(
                             filtro:{
                                 id: $id
                                 nome: $nome

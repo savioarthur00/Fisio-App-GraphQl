@@ -112,13 +112,13 @@ type Exame{
     nome:String
     pacientes: [Paciente]   
     fc:String
-    fR: String
-    pA:String
-    spO2: Int
+    fr: String
+    pa:String
+    spo2: Int
     temperatura: Int
     peso: Float
     altura: Float
-    iMC: Float
+    imc: Float
     auscultaPulmonar: String
     consciencia: String
     formatoTorax:String
@@ -158,13 +158,13 @@ input ExameInput{
     pacientes: [PacienteFiltro]  
     nome:String
     fc:String
-    fR: String
-    pA:String
-    spO2: Int
+    fr: String
+    pa:String
+    spo2: Int
     temperatura: Int
     peso: Float
     altura: Float
-    iMC: Float
+    imc: Float
     auscultaPulmonar: String
     consciencia: String
     formatoTorax:String

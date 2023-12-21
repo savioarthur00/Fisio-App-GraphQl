@@ -1,6 +1,6 @@
 const db = require('../../config/db')
 const { exame: obterExame } = require('../Query/Exame')
-const { sinal: obterSinal } = require('../Query/sinal')
+const { sinal: obterSinal, sinal } = require('../Query/sinal')
 const { sintoma: obterSintoma } = require('../Query/sintoma')
 const {paciente: obterPaciente}= require('../Query/paciente')
 
@@ -125,11 +125,37 @@ module.exports = {
                                 })
                         }
                     }
+                    for(let filtro of dados.pacientes) {
+                        const sinal = await obterSinal(_, {
+                            filtro
+                        })
+                        if(sinal) {
+                            await db('exames_sinais')
+                                .insert({
+                                    sinal_id: sinal.id,
+                                    exame_id: id
+                                })
+                        }
+                    }
+                    for(let filtro of dados.pacientes) {
+                        const sintoma = await obterSintoma(_, {
+                            filtro
+                        })
+                    
+                        if(sintoma) {
+                            await db('exames_sintomas')
+                                .insert({
+                                    sintoma_id: sintoma.id,
+                                    exame_id: id
+                                })
+                        }
+                    
+                    }
                 }
 
                
 
-                delete dados.pacientes
+                
                 await db('exames')
                     .where({ id })
                     .update(dados)

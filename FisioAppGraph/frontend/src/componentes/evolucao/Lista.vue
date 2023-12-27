@@ -24,6 +24,10 @@
                               .map(p => p.nome)
                               .join(', ') }}</td>
                       <td>{{ props.item.texto}}</td>
+
+                      <td>
+                        <v-icon @click="apagarEvolucao(props.item)">delete</v-icon>
+                    </td>
                       
                   </template>
               </v-data-table>
@@ -46,6 +50,7 @@ export default {
               { text: 'ID', value: 'id' },
               { text: 'Pacientes', value: 'pacientes' },
               { text: 'Texto', value: 'texto' },
+              { text: 'Excluir', value: 'excluir', sortable: false },
           ],
       }
   },
@@ -74,7 +79,33 @@ export default {
               this.evolucoes  = []
               this.erros = e
           })
-      }
+      },
+      apagarEvolucao(evolucao){
+        const id = evolucao.id;
+        this.$api.mutate({
+                mutation: gql `
+                    mutation($id: Int!)
+                    {excluirEvolucao(
+                            filtro:{id: $id }
+                        ){
+                            id texto
+                        }
+                    }
+                `, variables: {
+                    id: id,
+                    
+                }
+            }).then(resultado => {
+        if (resultado.data && resultado.data.excluirEvolucao) {
+            this.evolucoes = this.evolucoes.filter(ex => ex.id !== resultado.data.excluirEvolucao.id);
+            this.erros = null;
+        } else {
+            this.erros = "Erro ao excluir evolução.";
+        }
+    }).catch(e => {
+        this.erros = e;
+    });
+    }
   }
 }
 </script>

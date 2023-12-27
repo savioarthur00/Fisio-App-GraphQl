@@ -21,6 +21,11 @@
                         <td>{{ props.item.usuarios
                                 .map(p => p.nome)
                                 .join(', ') }}</td>
+
+                                
+                <td>
+                <v-icon @click="apagarPaciente(props.item)">delete</v-icon>
+                </td>
                     </template>
                 </v-data-table>
             </v-flex>
@@ -67,8 +72,53 @@ export default {
                 this.pacientes = []
                 this.erros = e
             })
-        }
-    }
+        },
+        
+        async apagarPaciente(paciente) {
+    const id = paciente.id;
+
+    try {
+      
+      const { data } = await this.$api.query({
+        query: gql`
+          query {
+            pacientes_by_pk(id: ${id}) {
+              id
+              evolucoes {
+                id
+              }
+            }
+          }
+        `,
+      });
+
+      const evolucoes = data.pacientes_by_pk.evolucoes;
+
+       if (evolucoes.length > 0) {
+        this.erros = "Há evoluções registradas nesse paciente. Você deve removê-las antes de apagar o paciente.";
+        return;
+      }
+
+    
+      await this.$api.mutate({
+        mutation: gql`
+          mutation($id: Int!) {
+            excluirPaciente(filtro: { id: $id }) {
+              id
+            }
+          }
+        `,
+        variables: {
+          id: id,
+        },
+      });
+
+      this.erros = null; 
+    } catch (error) {
+      this.erros = "Erro ao excluir paciente. Por favor, tente novamente mais tarde.";
+      console.error(error); 
+  }        
+ }}
 }
 </script>
 

@@ -1,3 +1,4 @@
+
 <template>
     <v-container fluid>
       <v-layout column>
@@ -36,6 +37,7 @@
 import Erros from '../comum/Erros'
 import gql from 'graphql-tag'
 
+
 export default {
   components: { Erros },
   data() {
@@ -47,7 +49,7 @@ export default {
               { text: 'Pacientes', value: 'pacientes' },
               { text: 'Nome', value: 'nome' },
               { text: 'Editar', value: 'editar', sortable: false },
-        { text: 'Excluir', value: 'excluir', sortable: false },
+              { text: 'Excluir', value: 'excluir', sortable: false },
           ],
       }
   },
@@ -72,8 +74,8 @@ export default {
           })
       },
       editarExame(exame) {
-      // Lógica para editar o exame
-      console.log('Editar exame:', exame);
+        
+               
     },
     apagarExame(exame) {
     const id = exame.id;

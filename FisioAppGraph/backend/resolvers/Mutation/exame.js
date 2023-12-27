@@ -152,8 +152,7 @@ module.exports = {
                     
                     }
                 }
-
-               
+             
 
                 
                 await db('exames')

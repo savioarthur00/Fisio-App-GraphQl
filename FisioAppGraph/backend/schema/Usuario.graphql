@@ -114,7 +114,7 @@ type Exame{
     fc:String
     fr: String
     pa:String
-    spo2: Int
+    spO2: Int
     temperatura: Int
     peso: Float
     altura: Float
@@ -160,7 +160,7 @@ input ExameInput{
     fc:String
     fr: String
     pa:String
-    spo2: Int
+    spO2: Int
     temperatura: Int
     peso: Float
     altura: Float

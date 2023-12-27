@@ -31,7 +31,7 @@
             <v-text-field label="FC" v-model="exame.fc" />
             <v-text-field label="FR" v-model="exame.fR" />
             <v-text-field label="PA" v-model="exame.pA" />
-            <v-text-field label="SpO2" v-model="exame.spO2" />
+            <v-text-field label="spO2" v-model="exame.spO2" />
             <v-text-field label="Temperatura" v-model="exame.temperatura" />
             <v-text-field label="Peso" v-model="exame.peso" />
             <v-text-field label="Altura" v-model="exame.altura" />
@@ -206,13 +206,13 @@
               <v-text-field label="Pacientes" readonly:value="pacientesNomes" />
               <v-text-field label="Nome" readonly v-model="dados.nome" />
               <v-text-field label="FC" readonly v-model="dados.fc" />
-              <v-text-field label="FR" readonly v-model="dados.fR" />
-              <v-text-field label="PA" readonly v-model="dados.pA" />
+              <v-text-field label="FR" readonly v-model="dados.fr" />
+              <v-text-field label="PA" readonly v-model="dados.pa" />
               <v-text-field label="SpO2" readonly v-model="dados.spO2" />
               <v-text-field label="Temperatura" readonly v-model="dados.temperatura" />
               <v-text-field label="Peso" readonly v-model="dados.peso" />
               <v-text-field label="Altura" readonly v-model="dados.altura" />
-              <v-text-field label="IMC" readonly v-model="dados.iMC" />
+              <v-text-field label="IMC" readonly v-model="dados.imc" />
               <v-text-field label="Ausculta Pulmonar" readonly v-model="dados.auscultaPulmonar" />
               <v-text-field label="Consciência" readonly v-model="dados.consciencia" />
               <v-text-field label="Formato do Tórax" readonly v-model="dados.formatoTorax" />
@@ -321,13 +321,13 @@
             $pacientes: [PacienteFiltro]  
             $nome:String
             $fc:String
-            $fR: String
-            $pA:String
+            $fr: String
+            $pa:String
             $spO2: Int
             $temperatura: Int
             $peso: Float
             $altura: Float
-            $iMC: Float
+            $imc: Float
             $auscultaPulmonar: String
             $consciencia: String
             $formatoTorax:String
@@ -365,13 +365,13 @@
             pacientes: $pacientes
             nome:$nome
             fc:$fc
-            fR:$fR 
-            pA:$pA
+            fr:$fr
+            pa:$pa
             spO2:$spO2 
             temperatura:$temperatura 
             peso:$peso 
             altura:$altura 
-            iMC:$iMC 
+            imc:$imc
             auscultaPulmonar:$auscultaPulmonar 
             consciencia: $consciencia 
             formatoTorax:$formatoTorax
@@ -412,11 +412,11 @@
             fc
             fr
             pa
-            spo2
+            spO2
             temperatura
             peso
             altura
-            iMC
+            imc
             auscultaPulmonar
             consciencia
             formatoTorax
@@ -454,13 +454,13 @@
           nome: this.exame.nome,
           pacientes: this.pacientesSelecionados,
           fc: this.exame.fc,
-          fR: this.exame.fR,
-          pA: this.exame.pA,
+          fr: this.exame.fr,
+          pa: this.exame.pa,
           spO2: parseInt(this.exame.spO2, 10),
           temperatura: parseInt(this.exame.temperatura, 10),
           peso: parseFloat(this.exame.peso, 10),
           altura:  parseFloat(this.exame.altura, 10),
-          iMC: parseFloat(this.exame.iMC, 10),
+          imc: parseFloat(this.exame.imc, 10),
           auscultaPulmonar: this.exame.auscultaPulmonar,
           consciencia: this.exame.consciencia,
           formatoTorax: this.exame.formatoTorax,
@@ -538,6 +538,6 @@
   </script>
   
   <style>
-  /* Estilos conforme necessário */
+
   </style>
   

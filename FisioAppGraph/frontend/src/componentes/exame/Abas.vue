@@ -18,9 +18,7 @@
                 Alterar
             </v-tab>
             
-            <v-tab ripple>
-                Excluir
-            </v-tab>
+          
 
             <v-tab-item>
                 <Lista />
@@ -38,9 +36,7 @@
                 <Alterar />
             </v-tab-item>
             
-            <v-tab-item>
-                <Excluir />
-            </v-tab-item>
+            
         </v-tabs>
     </v-container>
 </template>
@@ -50,10 +46,10 @@ import Lista from './Lista'
 import Consulta from './Consulta'
 import Novo from './Novo'
 import Alterar from './Alterar'
-import Excluir from './Excluir'
+
 
 export default {
-    components: { Lista, Consulta, Novo, Alterar, Excluir }
+    components: { Lista, Consulta, Novo, Alterar}
 }
 </script>
 
